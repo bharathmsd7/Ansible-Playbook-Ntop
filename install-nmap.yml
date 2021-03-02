@@ -9,10 +9,13 @@
   
   tasks:
     - name: debian | downloading NTOP repo package
-      get_url: url={{ ntop_debian_apt_url }}/{{ ntop_debian_package }} dest=/opt/{{ ntop_debian_package }}
+      get_url: 
+        url: {{ ntop_debian_apt_url }}/{{ ntop_debian_package }} 
+        dest: /opt/{{ ntop_debian_package }}
 
     - name: debian | installing NTOP repo package
-      apt: deb=/opt/{{ ntop_debian_package }}
+      apt: 
+        deb: /opt/{{ ntop_debian_package }}
       register: ntop_package_added
       always_run: yes
 
@@ -21,7 +24,9 @@
       when: ntop_package_added.changed
 
     - name: debian | installing pre-reqs
-      apt: name={{ item }} state=present
+      apt: 
+        name: {{ item }} 
+        state: present
       with_items:
         - libgeoip-dev
         - libglib2.0-dev
@@ -30,7 +35,9 @@
         - libxml2-dev
 
     - name: debian | installing NTOP package(s)
-      apt: name={{ item }} state=present
+      apt: 
+        name: {{ item }} 
+        state: present
       with_items:
         - ntopng
         - pfring
