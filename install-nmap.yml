@@ -4,6 +4,4 @@
   become_user: root
   become_method: sudo
   
-  roles:
-    - mrlesmithjr.redis
-    - mrlesmithjr.ntop
+  tasks:
